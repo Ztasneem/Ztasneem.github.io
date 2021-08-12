@@ -1,25 +1,35 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { Suspense, lazy } from "react";
+import { BrowserRouter, Route, Switch } from "react-router-dom";
+import { ProjectsProvider } from "./context/ProjectContext";
 
-function App() {
+import TopBar from "./partials/Topbar";
+import Loader from "./partials/Loading";
+
+import "./styles/style.css";
+
+const Home = lazy(() => import("./pages/Works/Home"));
+const About = lazy(() => import("./pages/About/About"));
+const Project = lazy(() => import("./pages/Works/Project"));
+const ErrorPage = lazy(() => import("./partials/404Page"));
+
+const App = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <React.Fragment>
+      <ProjectsProvider>
+        <BrowserRouter>
+          <Suspense fallback={<Loader />}>
+            <TopBar />
+            <Switch>
+              <Route exact path="/" component={Home} />
+              <Route path="/about" component={About} />
+              <Route path="/project/:id" component={Project} />
+              <Route component={ErrorPage} />
+            </Switch>
+          </Suspense>
+        </BrowserRouter>
+      </ProjectsProvider>
+    </React.Fragment>
   );
-}
+};
 
 export default App;
