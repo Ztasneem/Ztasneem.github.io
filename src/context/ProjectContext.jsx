@@ -5,6 +5,19 @@ export const ProjectsContext = createContext();
 
 export const ProjectsProvider = (props) => {
   const [projects] = useState([
+  	{
+      id: "portfolio",
+      name: "Web Dev portfolio",
+      image: "https://ik.imagekit.io/pvsizywre9b/portfolio_pTvyhDfV-vH.jpg?updatedAt=1628833087391",
+      imageURL:
+        "https://ik.imagekit.io/pvsizywre9b/portfolio_nk90suD0X.PNG?updatedAt=1628833087589",
+      description:
+        "Web Dev portfolio to showcase your projects.",
+      techstack: ["React", "SCSS", "Bootstrap"],
+      deploy: true,
+      deployment: "https://devgirl.netlify.app/",
+      code:"https://github.com/Ztasneem/portfolio"
+    },
     {
       id: "chatapp",
       name: "Web Chat App",
